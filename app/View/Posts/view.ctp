@@ -8,7 +8,7 @@
 
 <p><?php echo $post['Post']['tag']?></p>
 
-<?php  echo print_r($post) ?>
+<?php // echo print_r($post) ?>
 
 <br/><br/>      
 <h1>Add comment</h1>
