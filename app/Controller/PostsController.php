@@ -4,8 +4,8 @@ class PostsController extends AppController {
     public $helpers = array('Html','Form');
 
      function index() {
-        //$this->set('posts', $this->Post->find('all')); //cambié
-        $this->set('posts', $this->Post->find('all', array('conditions' => array('Post.habilitado' => '1'))));
+        $this->set('posts', $this->Post->find('all')); //cambié
+        //$this->set('posts', $this->Post->find('all', array('conditions' => array('Post.habilitado' => '1'))));
     }
 
     public function view($id = null) {
@@ -20,11 +20,6 @@ class PostsController extends AppController {
     
         $this->set('post', $this->Post->findById($id));
 
-	/*if (!empty($this->request->data)) { //con esto se crea un nuevo post y un nuevo comentario asociado a ese id del NUEVO post
-		// Use the following to avoid validation errors:
-		unset($this->Post->Comment->validate['post_id']);
-		$this->Post->saveAssociated($this->request->data);
-	}*/
         if ($this->request->is('post')) {
             $this->request->data['Comment']['post_id']=$id;
         	//pr($this->request->data);

@@ -6,7 +6,9 @@
 
 <p><?php echo $post['Post']['body']?></p>
 
-<?php //<pre> print_r($post) </pre> ?>
+<p><?php echo $post['Post']['tag']?></p>
+
+<?php  echo print_r($post) ?>
 
 <br/><br/>      
 <h1>Add comment</h1>
@@ -38,4 +40,5 @@
     <?php endforeach; ?>
 
 </table>
-<?php } //end_else ?>
+<?php } //end_else 
+?>
