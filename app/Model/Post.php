@@ -47,7 +47,7 @@ class Post extends AppModel {
             $array = explode(",",$dataTag);//pasar dataTag a array
             //debug($array);
             //die();
-            return json_encode($dataTag);
+            return json_encode($array);
         }
         
 
@@ -64,6 +64,7 @@ class Post extends AppModel {
         
         public function tagFormatAfterFind($tagString) {
             //debug($tagString);
+            //die();
             return json_decode($tagString,true);
         }
 
