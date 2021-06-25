@@ -21,7 +21,7 @@
         <!--<td><?php echo $post['Post']['tag']; ?></td>-->
         <td>
             <ul><?php
-                if (!empty($post['Post']['tag'])) { 
+                 if (!empty($post['Post']['tag'])) { 
                     foreach ($post['Post']['tag'] as $tags): 
                         echo '<li>'.$tags.'</li>';
                     endforeach; 

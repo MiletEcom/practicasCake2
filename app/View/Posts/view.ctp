@@ -7,12 +7,12 @@
 <p><?php echo $post['Post']['body']?></p>
 
 <p><?php
-                if (!empty($post['Post']['tag'])) { 
-                    foreach ($post['Post']['tag'] as $tags): 
-                        echo '<li>'.$tags.'</li>';
-                    endforeach; 
-                }
-                ?> </p>
+    if (!empty($post['Post']['tag'])) { 
+        foreach ($post['Post']['tag'] as $tags): 
+            echo '<li>'.$tags.'</li>';
+        endforeach; 
+    }
+?> </p>
 
 <?php // echo print_r($post) ?>
 

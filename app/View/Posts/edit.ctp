@@ -6,6 +6,9 @@
     echo $this->Form->create('Post'); 
     echo $this->Form->input('title');
     echo $this->Form->input('body', array('rows' => '3'));
+    /*echo $this->Form->input('tag', array('rows' => '2', 
+                                         'placeholder'=>"Separar Tags con comas. Ejm: medicina,doctor,salud"
+                                        ));*/
     echo $this->Form->input('id', array('type' => 'hidden'));
-    echo $this->Form->end('Save Post');
+    echo $this->Form->end('Update Post');
 ?>

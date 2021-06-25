@@ -1,7 +1,25 @@
 <?php
+
 class Post extends AppModel {
         public $name = 'Post';
-    
+        //behaviors
+        public $actsAs = array('Json'); //variable reservada
+
+        public function parentNode() {
+            if (!$this->id && empty($this->data)) {
+                return null;
+            }
+            if (isset($this->data['Post']['tag'])) {
+                $groupId = $this->data['Post']['tag'];
+            } else {
+                $groupId = $this->field('tag');
+            }
+            if (!$groupId) {
+                return null;
+            }
+            return array('Post' => array('id' => $groupId));
+        }
+
         public $validate = array(
             'title' => array(
                 'rule' => 'notBlank' //'rule' => 'notEmpty' //Validation::notEmpty() is deprecated. Use Validation::notBlank() instead
@@ -31,8 +49,7 @@ class Post extends AppModel {
                 'dependent' => true //si se elimina un post, eliminara tambien todos los comentarios asociados a ese post
             )
         );
-
-        public function beforeSave($options = array()) {
+        /*public function beforeSave($options = array()) {
             if (!empty($this->data['Post']['tag'])) {
         
                 $this->data['Post']['tag'] = $this->tagFormatBeforeSave(
@@ -66,7 +83,7 @@ class Post extends AppModel {
             //debug($tagString);
             //die();
             return json_decode($tagString,true);
-        }
-
+        }*/
+        
     }
 ?>
