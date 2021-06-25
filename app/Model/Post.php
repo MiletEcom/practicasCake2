@@ -3,7 +3,12 @@
 class Post extends AppModel {
         public $name = 'Post';
         //behaviors
-        public $actsAs = array('Json'); //variable reservada
+        //public $actsAs = array('Json'); //variable reservada
+        public $actsAs = array(
+            'Json' => array(
+                'option1_key' => 'option1_value'
+            )
+        );
 
         public function parentNode() {
             if (!$this->id && empty($this->data)) {
