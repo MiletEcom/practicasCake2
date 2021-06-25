@@ -3,16 +3,26 @@
 class JsonBehavior extends ModelBehavior {
 
     public function setup(Model $Model, $settings = array()) {
-        /*if (!isset($this->settings[$Model->alias])) {
+        
+        if (!isset($this->settings[$Model->alias])) {
+
             $this->settings[$Model->alias] = array(
-                'Reclamo' => 'Reclamo',
-                'Sugerencia' => 'Sugerencia',
-                'comentario' => 'comentario',
+                'beforeSave' => array(
+                    'disable'=>false,
+                    'eventName'=>'Model.{alias}.beforeSave',
+                    'onStopPropagation'=>'abort'
+                ),
+                'afterFind' => array(
+                    'disable'=>false,
+                    'eventName'=>'Model.{alias}.afterFind',
+                    'onStopPropagation'=>'continue'
+                )
             );
         }
+        
         $this->settings[$Model->alias] = array_merge(
-            $this->settings[$Model->alias], (array)$settings);
-    */
+            $this->settings[$Model->alias], (array)$settings
+        );
     }
 
     public function beforeSave(Model $Model,$options = array()) {
