@@ -6,7 +6,7 @@ class Post extends AppModel {
         //public $actsAs = array('Json'); //variable reservada
         public $actsAs = array(
             'Json' => array(
-                'option1_key' => 'option1_value'
+                'title' => 'Nuevotitle'
             )
         );
 

@@ -6,7 +6,13 @@ class JsonBehavior extends ModelBehavior {
         
         if (!isset($this->settings[$Model->alias])) {
 
-            $this->settings[$Model->alias] = array(
+                $this->settings[$Model->alias] = array(
+                    'title' => 'title_default_value',
+                    'body' => 'body_default_value',
+                    'tag' => 'tag_default_value',
+                );
+
+                /*$this->settings[$Model->alias] = array(
                 'beforeSave' => array(
                     'disable'=>false,
                     'eventName'=>'Model.{alias}.beforeSave',
@@ -16,8 +22,9 @@ class JsonBehavior extends ModelBehavior {
                     'disable'=>false,
                     'eventName'=>'Model.{alias}.afterFind',
                     'onStopPropagation'=>'continue'
-                )
-            );
+                ),
+                'className' => 'Tag'
+            );*/
         }
         
         $this->settings[$Model->alias] = array_merge(
