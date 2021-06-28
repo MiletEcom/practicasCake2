@@ -3,36 +3,47 @@
 class JsonBehavior extends ModelBehavior {
 
     public function setup(Model $Model, $settings = array()) {
-        
-        if (!isset($this->settings[$Model->alias])) {
 
-                $this->settings[$Model->alias] = array(
-                    'title' => 'title_default_value',
-                    'body' => 'body_default_value',
-                    'tag' => 'tag_default_value',
-                );
-
-                /*$this->settings[$Model->alias] = array(
-                'beforeSave' => array(
-                    'disable'=>false,
-                    'eventName'=>'Model.{alias}.beforeSave',
-                    'onStopPropagation'=>'abort'
-                ),
-                'afterFind' => array(
-                    'disable'=>false,
-                    'eventName'=>'Model.{alias}.afterFind',
-                    'onStopPropagation'=>'continue'
-                ),
-                'className' => 'Tag'
-            );*/
-        }
+        //debug($this->settings[$Model->alias]);die();
         
-        $this->settings[$Model->alias] = array_merge(
-            $this->settings[$Model->alias], (array)$settings
-        );
+        if(!isset($this->settings[$Model->alias])) {
+			$this->settings[$Model->alias] = array(
+                'field' => ''
+            );
+		}
+
+        //debug($this->settings[$Model->alias]);die();
+		$this->settings[$Model->alias]= array_merge(
+			$this->settings[$Model->alias] ,(array) $settings
+		);
+        
+        
     }
 
     public function beforeSave(Model $Model,$options = array()) {
+        $field= $this->settings[$Model->alias]['field'];
+        
+        if (!empty($Model->data[$Model->alias][$field] )) {
+            $Model->data[$Model->alias][$field] = $this->tagFormatBeforeSave(
+                $Model->data[$Model->alias][$field]
+            );
+        }
+        return true;
+    }
+    
+/*
+    $field= $this->settings[$Model->alias]['field'];
+        //debug($results);
+        foreach ($results as $key => $val) { 
+            if (isset($val[$Model->alias][$field])) { 
+                $results[$key][$Model->alias][$field]= $this->tagFormatAfterFind(
+                    $val[$Model->alias][$field]
+                );
+            }
+            
+        }*/
+    
+    /*public function beforeSave(Model $Model,$options = array()) {
         if (!empty($Model->data['Post']['tag'])) {
     
             $Model->data['Post']['tag'] = $this->tagFormatBeforeSave(
@@ -40,7 +51,7 @@ class JsonBehavior extends ModelBehavior {
             );
         }
         return true;
-    }
+    }*/
     
     public function tagFormatBeforeSave($dataTag) {
 
@@ -52,18 +63,28 @@ class JsonBehavior extends ModelBehavior {
     
 
     public function afterFind(Model $Model, $results, $primary = false) {
-        //debug($Model);
-        //die();
-        foreach ($results as $key => $val) {
-            if (isset($val['Post']['tag'])) {
-                $results[$key]['Post']['tag'] = $this->tagFormatAfterFind(
-                    $val['Post']['tag']
+        $field= $this->settings[$Model->alias]['field'];
+        //debug($results);
+        foreach ($results as $key => $val) { 
+            if (isset($val[$Model->alias][$field])) { 
+                $results[$key][$Model->alias][$field]= $this->tagFormatAfterFind(
+                    $val[$Model->alias][$field]
                 );
             }
+            
         }
-        return $results;
+            return $results;
     }
-    
+
+    /*foreach ($results as $key => $val) {
+        if (isset($val['Post']['tag'])) {
+            $results[$key]['Post']['tag'] = $this->tagFormatAfterFind(
+                $val['Post']['tag']
+            );
+        }
+    }*/
+
+
     public function tagFormatAfterFind($tagString) {
         //die();
         return json_decode($tagString,true);
