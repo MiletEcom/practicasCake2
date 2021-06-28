@@ -15,7 +15,8 @@ class JsonBehavior extends ModelBehavior {
         
         $this->settings[$Model->alias] = array_merge(
             $this->settings[$Model->alias], (array)$settings
-        );debug($this->settings[$Model->alias]);die();
+        );
+        //debug($this->settings[$Model->alias]);die();
     }
 
     public function beforeSave(Model $Model,$options = array()) {
