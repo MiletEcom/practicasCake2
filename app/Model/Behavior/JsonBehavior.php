@@ -7,29 +7,15 @@ class JsonBehavior extends ModelBehavior {
         if (!isset($this->settings[$Model->alias])) {
 
                 $this->settings[$Model->alias] = array(
-                    'title' => 'title_default_value',
-                    'body' => 'body_default_value',
-                    'tag' => 'tag_default_value',
+                    'title' => 'title_por_defecto',
+                    'body' => 'body_por_defecto',
+                    'tag' => 'tag_por_defecto',
                 );
-
-                /*$this->settings[$Model->alias] = array(
-                'beforeSave' => array(
-                    'disable'=>false,
-                    'eventName'=>'Model.{alias}.beforeSave',
-                    'onStopPropagation'=>'abort'
-                ),
-                'afterFind' => array(
-                    'disable'=>false,
-                    'eventName'=>'Model.{alias}.afterFind',
-                    'onStopPropagation'=>'continue'
-                ),
-                'className' => 'Tag'
-            );*/
         }
         
         $this->settings[$Model->alias] = array_merge(
             $this->settings[$Model->alias], (array)$settings
-        );
+        );debug($this->settings[$Model->alias]);die();
     }
 
     public function beforeSave(Model $Model,$options = array()) {
