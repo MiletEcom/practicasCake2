@@ -4,8 +4,8 @@ class PostsController extends AppController {
     public $helpers = array('Html','Form');
 
      function index() {
-        //$this->set('posts', $this->Post->find('all')); //cambié
-        $this->set('posts', $this->Post->find('all', array('conditions' => array('Post.habilitado' => '1'))));
+        $this->set('posts', $this->Post->find('all')); //cambié
+        //$this->set('posts', $this->Post->find('all', array('conditions' => array('Post.habilitado' => '1'))));
     }
 
     public function view($id = null) {

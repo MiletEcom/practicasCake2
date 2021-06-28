@@ -6,6 +6,7 @@
     <tr>
         <th>Id</th>
         <th>Title</th>
+        <th>Tags</th>
         <th>Actions</th>
         <th>Created</th>
         <th>Modified</th>
@@ -16,8 +17,17 @@
     <?php foreach ($posts as $post): ?>
     <tr>
         <td><?php echo $post['Post']['id']; ?></td>
+        <td><?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?></td>
+        <!--<td><?php echo $post['Post']['tag']; ?></td>-->
         <td>
-        <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
+            <ul><?php
+                 if (!empty($post['Post']['tag'])) { 
+                    foreach ($post['Post']['tag'] as $tags): 
+                        echo '<li>'.$tags.'</li>';
+                    endforeach; 
+                }
+                ?>         
+            </ul>
         </td>
         <td>
         <?php echo $this->Form->postLink(
