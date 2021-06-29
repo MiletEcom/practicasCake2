@@ -1,5 +1,7 @@
 <?php
 
+App::uses('PostSlugListener', 'Event');
+
 class Post extends AppModel {
         public $name = 'Post';
         //behaviors
@@ -9,6 +11,24 @@ class Post extends AppModel {
                 'field' => 'tag'
             )
         );
+
+        public function afterSave($created, $options = array()) {
+
+            parent::afterSave($created, $options);
+
+            //$slugAttach = new PostSlugListener();
+            //$this->getEventManager()->attach($slugAttach);
+            
+            if ($created === true) {
+                $Event = new CakeEvent('Model.Post.createdSlug', $this, array(
+                    'id' => $this->id,
+                    'title' => $this->data[$this->alias]
+                ));
+                $this->getEventManager()->dispatch($Event);
+            }
+    
+        }
+    
 
         public function parentNode() {
             if (!$this->id && empty($this->data)) {
