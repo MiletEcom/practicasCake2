@@ -16,8 +16,9 @@ class Post extends AppModel {
             $slug = new BeforeSavePost();
             $this->getEventManager()->attach($slug);
 
+            //debug($this->data);die();
             $Event = new CakeEvent('Model.Post.beforeSave', $this, array(
-                'data' => $this->data[$this->alias]
+                'data' => $this->data['Post']
             ));
             $this->getEventManager()->dispatch($Event);
     
