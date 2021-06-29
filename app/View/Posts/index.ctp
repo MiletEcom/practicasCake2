@@ -7,6 +7,7 @@
         <th>Id</th>
         <th>Title</th>
         <th>Tags</th>
+        <th>Slug</th>
         <th>Actions</th>
         <th>Created</th>
         <th>Modified</th>
@@ -29,6 +30,7 @@
                 ?>         
             </ul>
         </td>
+        <td><?php echo $post['Post']['slug'];?></td>
         <td>
         <?php echo $this->Form->postLink(
             'Delete',
