@@ -1,6 +1,6 @@
 <?php
 
-App::uses('AfterSavePost', 'Event');
+App::uses('BeforeSavePost', 'Event');
 
 class Post extends AppModel {
         public $name = 'Post';
@@ -12,20 +12,14 @@ class Post extends AppModel {
             )
         );
 
-        public function afterSave($created, $options = array()) {
+        public function beforeSave($options = array()) {
+            $slug = new BeforeSavePost();
+            $this->getEventManager()->attach($slug);
 
-            parent::afterSave($created, $options);
-
-            //$slugAttach = new AfterSavePost();
-            //$this->getEventManager()->attach($slugAttach);
-            
-            if ($created === true) {
-                $Event = new CakeEvent('Model.Post.afterSave', $this, array(
-                    'id' => $this->id,
-                    'title' => $this->data[$this->alias]
-                ));
-                $this->getEventManager()->dispatch($Event);
-            }
+            $Event = new CakeEvent('Model.Post.beforeSave', $this, array(
+                'data' => $this->data[$this->alias]
+            ));
+            $this->getEventManager()->dispatch($Event);
     
         }
     
