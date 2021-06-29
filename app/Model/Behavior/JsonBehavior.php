@@ -22,6 +22,9 @@ class JsonBehavior extends ModelBehavior {
 
     public function beforeSave(Model $Model,$options = array()) {
         $field= $this->settings[$Model->alias]['field'];
+        if (!$field) {
+            throw new Exception('No existe una configuracion válida para FIELD');
+        }
         
         if (!empty($Model->data[$Model->alias][$field] )) {
             $Model->data[$Model->alias][$field] = $this->tagFormatBeforeSave(
@@ -64,6 +67,9 @@ class JsonBehavior extends ModelBehavior {
 
     public function afterFind(Model $Model, $results, $primary = false) {
         $field= $this->settings[$Model->alias]['field'];
+        if (!$field) {
+            throw new Exception('No existe una configuracion válida para FIELD');
+        }
         //debug($results);
         foreach ($results as $key => $val) { 
             if (isset($val[$Model->alias][$field])) { 
