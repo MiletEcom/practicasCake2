@@ -1,0 +1,9 @@
+[36mUsage:[0m
+cake find_post [-h] [-v] [-q]
+
+[36mOptions:[0m
+
+--help, -h     Display this help.
+--verbose, -v  Enable verbose output.
+--quiet, -q    Enable quiet output.
+
