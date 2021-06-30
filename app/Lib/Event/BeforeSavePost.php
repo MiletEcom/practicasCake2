@@ -18,11 +18,10 @@ class BeforeSavePost implements CakeEventListener {
                 )
             )
         );
-        if (empty($datos)) {
-            $event->data['Post']['slug'] = $titlePost;
-            $Post->save($event->data['Post']);
+        if (!empty($datos)) {
+            throw new Exception('Ya existe un slug con la misma caracteristica en la BD');
         }else{
-            $event->data['Post']['slug'] = $titlePost.'-2'; //agrego un -2 al final para que siga siendo unico
+            $event->data['Post']['slug'] = $titlePost;
             $Post->save($event->data['Post']);
         }
 
