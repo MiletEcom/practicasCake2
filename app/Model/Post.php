@@ -50,6 +50,9 @@ class Post extends AppModel {
             'tag' => array(
                 'rule' => 'notBlankTags',
                 'message' => 'Only letters separated by commas can be accepted.'
+            ),
+            'slug' =>  array(
+                'rule' => 'isUnique'
             )
         );
         public function notBlankTags($check) {
