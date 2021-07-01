@@ -16,7 +16,7 @@ class FindPostShell extends AppShell {
         $posts = $this->Post->find('all',$opciones);
 
         while($posts){
-            //$post = $this->Post->find('all',$opciones);
+            $post = $this->Post->find('all',$opciones);
             foreach($posts as $p) {
                 
                 //$this->out($p['Post']['slug']);//die();
