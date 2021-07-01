@@ -16,7 +16,7 @@ class FindPostShell extends AppShell {
         $posts = $this->Post->find('all',$opciones);
 
         while($posts){
-            $post = $this->Post->find('all',$opciones);
+            $posts = $this->Post->find('all',$opciones);
             foreach($posts as $p) {
                 
                 //$this->out($p['Post']['slug']);//die();
@@ -26,7 +26,7 @@ class FindPostShell extends AppShell {
                     $p['Post']['slug'] = $titlePost;
 
                     if (!$this->Post->save($p['Post'])) {
-                        $this->out('No guardo');
+                        debug($this->Post->validationErrors);
                     }
                        
                     // echo debug($this->Post->id);die();
@@ -40,6 +40,6 @@ class FindPostShell extends AppShell {
             
             $opciones['page']++;
         }
-        //die();
+        die();
     }
 }
