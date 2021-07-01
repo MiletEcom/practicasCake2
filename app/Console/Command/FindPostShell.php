@@ -2,13 +2,11 @@
 class FindPostShell extends AppShell {
     
     public $uses = array('Post');
-    //public $post = array('Post');
 
     public function main() {
         $this->out('Hola, ingresa con la palabra show');
     }
     public function show() {
-         //die('holaaa');
         $opciones=array(
             'limit' => 10,
             'page' => 1,
@@ -18,7 +16,6 @@ class FindPostShell extends AppShell {
         while($posts){
             $posts = $this->Post->find('all',$opciones);
             foreach($posts as $p) {
-                
                 //$this->out($p['Post']['slug']);//die();
                 if (empty($p['Post']['slug'])) {
                 
@@ -27,13 +24,12 @@ class FindPostShell extends AppShell {
 
                     if (!$this->Post->save($p['Post'])) {
                         $this->out('FALSE, no guardo');
+                    }else{
+                        //die('holaaa');
+                        $this->out('Le agregué una nueva slug '.$titlePost);
                     }
-                       
-                    // echo debug($this->Post->id);die();
-                    $this->out('Le agregué una nueva slug '.$titlePost);
                      
                 }else{
-       
                    $this->out('Ya el post tiene una slug asociada, no hago nada');
                 }
             }
