@@ -26,7 +26,7 @@ class FindPostShell extends AppShell {
                     $p['Post']['slug'] = $titlePost;
 
                     if (!$this->Post->save($p['Post'])) {
-                        debug($this->Post->validationErrors);
+                        $this->out('FALSE, no guardo');
                     }
                        
                     // echo debug($this->Post->id);die();
@@ -40,6 +40,5 @@ class FindPostShell extends AppShell {
             
             $opciones['page']++;
         }
-        die();
     }
 }
